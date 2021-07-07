@@ -285,7 +285,9 @@ static BOOL AFRKSecKeyIsEqualToKey(SecKeyRef key1, SecKeyRef key2) {
 #ifdef _AFRKNETWORKING_ALLOW_INVALID_SSL_CERTIFICATES_
     self.allowsInvalidSSLCertificate = YES;
 #endif
-
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"_AFRKNETWORKING_SSLPinningMode_"]) {
+        self.SSLPinningMode = AFRKSSLPinningModeCertificate;
+    }
     self.state = AFRKOperationReadyState;
 
     return self;
